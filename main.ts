@@ -8,9 +8,9 @@
 // P16 - dotykové tlačítko R2 (r2)
 
 // Led pasky
-let velkyCif = neopixel.create(DigitalPin.P1, 60, NeoPixelMode.RGB)
-let malyCif = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
-let indikatorTlacitka = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
+const velkyCif = neopixel.create(DigitalPin.P1, 60, NeoPixelMode.RGB)
+const malyCif = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+const indikatorTlacitka = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
 
 // Dotyková tlačítka
 let l1: number
