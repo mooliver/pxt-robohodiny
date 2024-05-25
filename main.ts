@@ -24,26 +24,36 @@ function showLeds() { // Funkce zobrazí všechny LEDky
     indikatorTlacitka.show()
 }
 
-basic.forever(function() {
-    /* l1 = pins.digitalReadPin(DigitalPin.P13)
+function checkButtons() {
+    l1 = pins.digitalReadPin(DigitalPin.P13)
     l2 = pins.digitalReadPin(DigitalPin.P14)
     r1 = pins.digitalReadPin(DigitalPin.P15)
     r2 = pins.digitalReadPin(DigitalPin.P16)
+}
+
+basic.forever(function() {
+    checkButtons()
+    
+    malyCif.setPixelColor(1, neopixel.hsl(180, 100, 50))
+    velkyCif.setPixelColor(1, neopixel.hsl(180, 100, 50))
+    indikatorTlacitka.setPixelColor(1, neopixel.hsl(180, 100, 50))
+
     if (l1 === 1) {
-        malyCif.setPixelColor(1, neopixel.hsl(0, 100, 50))
-        showLeds()
+        malyCif.setPixelColor(2, neopixel.hsl(180, 100, 50))
+        velkyCif.setPixelColor(2, neopixel.hsl(180, 100, 50))
     }
     if (l2 === 1) {
-        malyCif.setPixelColor(2, neopixel.hsl(0, 100, 50))
-        showLeds()
+        malyCif.setPixelColor(3, neopixel.hsl(180, 100, 50))
+        velkyCif.setPixelColor(3, neopixel.hsl(180, 100, 50))
     }
     if (r1 === 1) {
-        malyCif.setPixelColor(3, neopixel.hsl(0, 100, 50))
-        showLeds()
+        malyCif.setPixelColor(4, neopixel.hsl(180, 100, 50))
+        velkyCif.setPixelColor(4, neopixel.hsl(180, 100, 50))
     }
     if (r2 === 1) {
-        malyCif.setPixelColor(4, neopixel.hsl(0, 100, 50))
-        showLeds()
-    } */
+        malyCif.setPixelColor(5, neopixel.hsl(180, 100, 50))
+        velkyCif.setPixelColor(5, neopixel.hsl(180, 100, 50))
+    }
+
     showLeds()
 })
