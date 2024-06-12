@@ -18,6 +18,11 @@ let l2: number
 let r1: number
 let r2: number
 
+let hodiny: boolean = true
+let stopky: boolean = false
+let modeHodiny: boolean = true
+let modeDatum: boolean = false
+
 function showLeds() { // Funkce zobrazí všechny LEDky
     malyCif.show(),
     velkyCif.show(),
@@ -30,45 +35,53 @@ function clearLeds() { // Funkce skryje všechny LEDky
     showLeds()
 }
 
-function checkButtons() {
-    l1 = pins.digitalReadPin(DigitalPin.P13)
-    l2 = pins.digitalReadPin(DigitalPin.P14)
-    r1 = pins.digitalReadPin(DigitalPin.P15)
-    r2 = pins.digitalReadPin(DigitalPin.P16)
-}
-
-function hodinyCas() {
-    stavLed.clear()
-    stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
+pins.onPulsed(DigitalPin.P13, PulseValue.Low, function() { // Funkce hodiny
+    hodiny = true
+    stopky = false
+    modeHodiny = true
+    modeDatum = false
     loops.everyInterval(5000, function () {
-        clearLeds()
-        malyCif.setPixelColor((DS3231.hour() - 1), neopixel.rgb(0, 200, 10))
-        if (DS3231.minute() <= 30) {
-            velkyCif.setPixelColor((DS3231.minute() + 30), neopixel.rgb(0, 200, 10))
-        } else {
-            velkyCif.setPixelColor((DS3231.minute() - 30), neopixel.rgb(0, 200, 10))
+        if (hodiny === true && modeDatum === false) {
+            clearLeds()
+            malyCif.setPixelColor((DS3231.hour() - 1), neopixel.rgb(0, 200, 10))
+            if (DS3231.minute() < 30) {
+                velkyCif.setPixelColor((DS3231.minute() + 30), neopixel.rgb(0, 200, 10))
+            } else {
+                velkyCif.setPixelColor((DS3231.minute() - 30), neopixel.rgb(0, 200, 10))
+            }
+            showLeds()
+            console.log("spusteno")
+            basic.showIcon(IconNames.Heart)
         }
-        showLeds()
-        console.log("spusteno")
     })
-}
-
-function stopky() {
-    stavLed.clear()
-    stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
-    loops.everyInterval(5000, function () {
-        console.log("Spusteno")
-    })
-}
-
-
-
-input.onButtonPressed(Button.A, function() {
-    DS3231.dateTime(2024, 6, 12, 3, 18, 53, 30)
 })
 
-input.onButtonPressed(Button.B, function() {
-    loops.everyInterval(5000, function() {
-        basic.showNumber(DS3231.second())
+pins.onPulsed(DigitalPin.P15, PulseValue.Low, function() { // Funkce hodiny
+    modeDatum = false
+    modeHodiny = true
+    loops.everyInterval(5000, function () {
+        if (hodiny === true && modeDatum === false) {
+            clearLeds()
+            malyCif.setPixelColor((DS3231.hour() - 1), neopixel.rgb(0, 200, 10))
+            if (DS3231.minute() < 30) {
+                velkyCif.setPixelColor((DS3231.minute() + 30), neopixel.rgb(0, 200, 10))
+            } else {
+                velkyCif.setPixelColor((DS3231.minute() - 30), neopixel.rgb(0, 200, 10))
+            }
+            showLeds()
+            console.log("spusteno")
+            basic.showIcon(IconNames.Heart)
+        }
     })
+})
+
+pins.onPulsed(DigitalPin.P16, PulseValue.Low, function() { // Funkce datum
+    modeDatum = true
+    modeHodiny = false
+    if (hodiny === true && modeDatum === true) {
+        clearLeds()
+        malyCif.setPixelColor((DS3231.month() - 1), neopixel.rgb(0, 200, 10))
+        velkyCif.setPixelColor((DS3231.day() - 1), neopixel.rgb(0, 200, 10))
+        showLeds()
+    }
 })
