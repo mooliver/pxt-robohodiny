@@ -10,9 +10,9 @@
 `P16` - dotykové tlačítko r2 *(righ button 2)* <br>
 
 ## Funkce
-*Tlačítko L1* - změní stav na *hodiny*
-*Tlačítko L2* - změní stav na *stopky*
-*Tlačítko R1* - stav *hodiny* - zobrazí čas
-            - stav *stopky* - spustí časování
-*Tlačítko R2* - stav *hodiny* - zobrazí datum
-            - stav *stopky* - zastaví časování
+**Tlačítko L1** - změní stav na *hodiny* <br>
+**Tlačítko L2** - změní stav na *stopky* <br>
+**Tlačítko R1** - stav *hodiny* - zobrazí čas <br>
+            - stav *stopky* - spustí časování <br>
+**Tlačítko R2** - stav *hodiny* - zobrazí datum <br>
+            - stav *stopky* - zastaví časování <br>
