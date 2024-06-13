@@ -14,6 +14,7 @@
 **Tlačítko L2** - změní stav na *stopky* <br>
 
 **Tlačítko R1** - stav *hodiny* - zobrazí čas <br>
-**Tlačítko R1** - stav *stopky* - spustí časování <br>
 **Tlačítko R2** - stav *hodiny* - zobrazí datum <br>
+
+**Tlačítko R1** - stav *stopky* - spustí časování <br>
 **Tlačítko R2** - stav *stopky* - zastaví časování <br>
