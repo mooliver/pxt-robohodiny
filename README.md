@@ -19,6 +19,6 @@
 **Tlačítko R1** - stav *stopky* - spustí časování <br>
 **Tlačítko R2** - stav *stopky* - zastaví časování <br>
 
-# Použitá rozšíření
+### Použitá rozšíření
 - Pracování s ledkami - [**Neopixel**](https://makecode.microbit.org/pkg/microsoft/pxt-neopixel)
 - Pracování s RTC modulem - [**DS3231**](https://makecode.microbit.org/pkg/keble6/pxt-ds3231)
