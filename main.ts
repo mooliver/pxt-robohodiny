@@ -71,15 +71,15 @@ function hodinyDatum() { // Zobrazí aktuální datum
 }
 
 function stopovaniCasu() { // Stopky
-    if (sec < 30 && sec !== 60) {
+    if (sec < 30 && sec !== 60) { // Kontroluje zda jsou sekundy pod 30 a nepřesahují 60
         velkyCif.clear()
         velkyCif.setPixelColor((sec + 30), neopixel.rgb(0, 200, 10))
         showCif()
-    } else if (sec !== 60) {
+    } else if (sec !== 60) { // Kontroluje zda jsou sekundy nad 30 a nepřesahují 60
         velkyCif.clear()
         velkyCif.setPixelColor((sec - 30), neopixel.rgb(0, 200, 10))
         showCif()
-    } else {
+    } else { // Kontroluje zda jsou sekundy nad 60, resetuje je a přidá 1 minutu
         clearCif()
         sec = 0
         min++
@@ -90,6 +90,8 @@ function stopovaniCasu() { // Stopky
     sec++
 }
 
+
+// Kód zobrazující čas po spuštění hodin (microbitu)
 hodinyCas()
 stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
 stavLed.setPixelColor(1, neopixel.rgb(0, 200, 10))
@@ -97,14 +99,14 @@ stavLed.show()
 
 // Funkce tlačítek
 pins.onPulsed(DigitalPin.P13, PulseValue.Low, function() { // Tlačítko L1
-    hodiny = true
+    hodiny = true // Změní stav hodin (hodiny nebo stopky)
     stopky = false
 
-    modeHodiny = true
+    modeHodiny = true // Zmení mód hodina (čas nebo datum)
     modeDatum = false
     stop = true
 
-    loops.everyInterval(5000, function () {
+    loops.everyInterval(5000, function () { // Každých 5 sekund aktualizuje čas
         if (hodiny && modeHodiny) {
             hodinyCas()
         }
@@ -117,12 +119,12 @@ pins.onPulsed(DigitalPin.P13, PulseValue.Low, function() { // Tlačítko L1
 })
 
 pins.onPulsed(DigitalPin.P14, PulseValue.Low, function () { // Tlačítko L2    
-    hodiny = false
+    hodiny = false // Změní stav hodin (hodiny nebo stopky)
     stopky = true
 
-    modeHodiny = false
+    modeHodiny = false // Zmení mód hodina (čas nebo datum)
     modeDatum = false
-    stop = true
+    stop = true // Zamnkne stopky
 
     clearLeds()
     stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
@@ -132,19 +134,19 @@ pins.onPulsed(DigitalPin.P14, PulseValue.Low, function () { // Tlačítko L2
 pins.onPulsed(DigitalPin.P15, PulseValue.Low, function () { // Tlačítko R1
     stavLed.clear()
     
-    if (hodiny) {
-        modeDatum = false
+    if (hodiny) { // Zjišťuje zda jsou aktivní hodiny či stopky
+        modeDatum = false // Změní stav hodin (hodiny nebo stopky)
         modeHodiny = true
-        stop = true
+        stop = true // Zamnkne stopky
         stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
-        loops.everyInterval(5000, function () {
-            if (hodiny && modeHodiny) {
+        loops.everyInterval(5000, function () { // Každých 5 sekund aktualizuje čas
+            if (hodiny && modeHodiny) { 
                 hodinyCas()
             }
         })
-    } else if (stopky) {
+    } else if (stopky) { // Zjišťuje zda jsou aktivní hodiny či stopky
         stop = false
-        sec = 0
+        sec = 0 // Resetuje stopky
         min = 0
         stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
     }
@@ -157,15 +159,15 @@ pins.onPulsed(DigitalPin.P16, PulseValue.Low, function () { // Tlačítko R2
     stop = true
     stavLed.clear()
 
-    if (hodiny) {
-        modeDatum = true
+    if (hodiny) { // Zjišťuje zda jsou aktivní hodiny či stopky
+        modeDatum = true // Zmení mód hodin (čas nebo datum)
         modeHodiny = false
         if (modeDatum) {
             hodinyDatum()
         }
         
         stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
-    } else {
+    } else { // Zjišťuje zda jsou aktivní hodiny či stopky
         stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
         malyCif.clear()
     }
@@ -174,9 +176,9 @@ pins.onPulsed(DigitalPin.P16, PulseValue.Low, function () { // Tlačítko R2
     stavLed.show()
 })
 
-loops.everyInterval(100, function() {
-    if (stopky && !stop) {
-        stopovaniCasu()
+loops.everyInterval(100, function() { 
+    if (stopky && !stop) { // Kontroluje zda-li jsou spuštěné stopky
+        stopovaniCasu() // Stopuje Čas
         control.waitMicros(1000000)
     }
 })
