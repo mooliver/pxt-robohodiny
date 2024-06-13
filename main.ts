@@ -167,6 +167,7 @@ pins.onPulsed(DigitalPin.P16, PulseValue.Low, function () { // Tlačítko R2
         stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
     } else {
         stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
+        malyCif.clear()
     }
 
     stavLed.setPixelColor(0, neopixel.rgb(0, 200, 10))
