@@ -20,8 +20,8 @@ let modeHodiny: boolean = true // Indikuje jaký je spuštěný mód u hodin
 let modeDatum: boolean = false // Indikuje jaký je spuštěný mód u hodin
 
 let stop: boolean = false // Identifiku zda jsou spuštěné či zastavené stopky
-let sec: number = 0
-let min: number = 0
+let sec: number = 0 // Nastaví sekundy stopek na nulu
+let min: number = 0 // Nastaví minuty stopek na nulu
 
 function showLeds() { // Zobrazí všechny LEDky
     malyCif.show(),
@@ -50,7 +50,7 @@ function clearLeds() { // Zhasne všechny LEDky
 function hodinyCas() { // Zobrazí aktuální čas
     clearCif()
     malyCif.setPixelColor((DS3231.hour() - 1), neopixel.rgb(0, 200, 10))
-    if (DS3231.minute() < 30) {
+    if (DS3231.minute() < 30) { // Čas se musí přepočítat kvůli posunutí led kruhu (LED č1 je v čase 30 minut)
         velkyCif.setPixelColor((DS3231.minute() + 30), neopixel.rgb(0, 200, 10))
     } else {
         velkyCif.setPixelColor((DS3231.minute() - 30), neopixel.rgb(0, 200, 10))
@@ -61,7 +61,7 @@ function hodinyCas() { // Zobrazí aktuální čas
 function hodinyDatum() { // Zobrazí aktuální datum
     clearCif()
     malyCif.setPixelColor((DS3231.month() - 1), neopixel.rgb(0, 200, 10))
-    if (DS3231.date() < 30) {
+    if (DS3231.date() < 30) { // Datum se musí přepočítat kvůli posunutí led kruhu (LED č1 je ve 30. dni)
         velkyCif.setPixelColor((DS3231.date() + 30), neopixel.rgb(0, 200, 10))
     } else {
         velkyCif.setPixelColor((DS3231.date() - 30), neopixel.rgb(0, 200, 10))
@@ -70,7 +70,7 @@ function hodinyDatum() { // Zobrazí aktuální datum
     showLeds()
 }
 
-function stopovaniCasu() {
+function stopovaniCasu() { // Stopky
     if (sec < 30 && sec !== 60) {
         velkyCif.clear()
         velkyCif.setPixelColor((sec + 30), neopixel.rgb(0, 200, 10))
@@ -90,6 +90,10 @@ function stopovaniCasu() {
     sec++
 }
 
+hodinyCas()
+stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
+stavLed.setPixelColor(1, neopixel.rgb(0, 200, 10))
+stavLed.show()
 
 // Funkce tlačítek
 pins.onPulsed(DigitalPin.P13, PulseValue.Low, function() { // Tlačítko L1
@@ -101,7 +105,7 @@ pins.onPulsed(DigitalPin.P13, PulseValue.Low, function() { // Tlačítko L1
     stop = true
 
     loops.everyInterval(5000, function () {
-        if (hodiny === true && modeDatum === false) {
+        if (hodiny && modeHodiny) {
             hodinyCas()
         }
     })
@@ -134,7 +138,7 @@ pins.onPulsed(DigitalPin.P15, PulseValue.Low, function () { // Tlačítko R1
         stop = true
         stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
         loops.everyInterval(5000, function () {
-            if (hodiny === true && modeDatum === false) {
+            if (hodiny && modeHodiny) {
                 hodinyCas()
             }
         })
@@ -156,7 +160,10 @@ pins.onPulsed(DigitalPin.P16, PulseValue.Low, function () { // Tlačítko R2
     if (hodiny) {
         modeDatum = true
         modeHodiny = false
-        hodinyDatum()
+        if (modeDatum) {
+            hodinyDatum()
+        }
+        
         stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
     } else {
         stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
