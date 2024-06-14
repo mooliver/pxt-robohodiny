@@ -49,12 +49,14 @@ function clearLeds() { // Zhasne všechny LEDky
 
 function hodinyCas() { // Zobrazí aktuální čas
     clearCif()
+
     malyCif.setPixelColor(DS3231.hour() - 1, neopixel.rgb(0, 200, 10))
     if (DS3231.minute() < 30) { // Čas se musí přepočítat kvůli posunutí led kruhu (LED č1 je v čase 30 minut)
         velkyCif.setPixelColor((DS3231.minute() + 30), neopixel.rgb(0, 200, 10))
     } else {
         velkyCif.setPixelColor((DS3231.minute() - 30), neopixel.rgb(0, 200, 10))
     }
+    
     showLeds()
 }
 
@@ -180,6 +182,6 @@ pins.onPulsed(DigitalPin.P16, PulseValue.Low, function () { // Tlačítko R2
 loops.everyInterval(100, function() { 
     if (stopky && !stop) { // Kontroluje zda-li jsou spuštěné stopky
         stopovaniCasu() // Stopuje Čas
-        control.waitMicros(1000000)
+        control.waitMicros(900000)
     }
 })
