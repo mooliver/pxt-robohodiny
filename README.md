@@ -1,4 +1,4 @@
-# Robohodiny
+# Robohodiny 🕰
 
 ## 📌 Pinout
 `P0 ` - malý ciferník *(24 LED)* <br>
@@ -9,7 +9,7 @@
 `P15` - dotykové tlačítko r1 *(righ button 1)* <br>
 `P16` - dotykové tlačítko r2 *(righ button 2)* <br>
 
-## ⚙️ Funkce
+## ⚙️ Funkce tlačítek
 **Tlačítko L1** - změní stav na *hodiny* <br>
 **Tlačítko L2** - změní stav na *stopky* <br>
 

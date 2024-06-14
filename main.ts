@@ -49,7 +49,7 @@ function clearLeds() { // Zhasne všechny LEDky
 
 function hodinyCas() { // Zobrazí aktuální čas
     clearCif()
-    malyCif.setPixelColor((DS3231.hour() - 1), neopixel.rgb(0, 200, 10))
+    malyCif.setPixelColor(DS3231.hour() - 1, neopixel.rgb(0, 200, 10))
     if (DS3231.minute() < 30) { // Čas se musí přepočítat kvůli posunutí led kruhu (LED č1 je v čase 30 minut)
         velkyCif.setPixelColor((DS3231.minute() + 30), neopixel.rgb(0, 200, 10))
     } else {
@@ -66,7 +66,6 @@ function hodinyDatum() { // Zobrazí aktuální datum
     } else {
         velkyCif.setPixelColor((DS3231.date() - 30), neopixel.rgb(0, 200, 10))
     }
-    
     showLeds()
 }
 
@@ -104,8 +103,9 @@ pins.onPulsed(DigitalPin.P13, PulseValue.Low, function() { // Tlačítko L1
 
     modeHodiny = true // Zmení mód hodina (čas nebo datum)
     modeDatum = false
-    stop = true
 
+    stop = true // Zamkne stopky
+     
     loops.everyInterval(5000, function () { // Každých 5 sekund aktualizuje čas
         if (hodiny && modeHodiny) {
             hodinyCas()
