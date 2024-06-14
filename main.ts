@@ -164,9 +164,10 @@ pins.onPulsed(DigitalPin.P16, PulseValue.Low, function () { // Tlačítko R2
         modeHodiny = false
         if (modeDatum) {
             hodinyDatum()
+            stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
         }
         
-        stavLed.setPixelColor(3, neopixel.rgb(0, 200, 10))
+        
     } else { // Zjišťuje zda jsou aktivní hodiny či stopky
         stavLed.setPixelColor(2, neopixel.rgb(0, 200, 10))
         malyCif.clear()
