@@ -1,5 +1,5 @@
 {
-    "name": "pxt-robohodiny",
+    "name": "pxt-robotic-clock",
     "description": "",
     "dependencies": {
         "core": "*",
