@@ -52,9 +52,12 @@ function clearLeds() { // Zhasne všechny LEDky
 function hodinyCas() { // Zobrazí aktuální čas
     clearCif()
 
-    malyCif.setPixelColor(0, barvaLed)
-    malyCif.setPixelColor(1, barvaLed)
-    malyCif.rotate(DS3231.hour() * 2 - 1)
+    if (DS3231.minute() <= 30) {
+        malyCif.setPixelColor(20, barvaLed)
+    } else {
+        malyCif.setPixelColor(21, barvaLed)
+    }
+    malyCif.rotate(DS3231.hour() * 2 - 2)
     
     velkyCif.setPixelColor(30, barvaLed)
     velkyCif.rotate(DS3231.minute())
@@ -65,8 +68,8 @@ function hodinyCas() { // Zobrazí aktuální čas
 function hodinyDatum() { // Zobrazí aktuální datum
     clearCif()
 
-    malyCif.setPixelColor(0, barvaLed)
-    malyCif.setPixelColor(1, barvaLed)
+    malyCif.setPixelColor(20, barvaLed)
+    malyCif.setPixelColor(21, barvaLed)
     malyCif.rotate(DS3231.month() * 2 - 1)
 
     velkyCif.setPixelColor(30, barvaLed)
@@ -82,13 +85,13 @@ function stopovaniCasu() { // Stopky
         velkyCif.show()
     } else if (min === 0) {
         velkyCif.rotate(1)
-        sec = 0
+        sec = 1
         min++
         showCif()
     } else {
         malyCif.rotate(2)
         velkyCif.rotate(1)
-        sec = 0
+        sec = 1
         min++
         showCif()
     }
@@ -154,8 +157,9 @@ pins.onPulsed(DigitalPin.P15, PulseValue.Low, function () { // Tlačítko R1
         velkyCif.setPixelColor(30, barvaLed)
 
         malyCif.clear()
-        malyCif.setPixelColor(0, barvaLed)
-        malyCif.setPixelColor(1, barvaLed)
+        malyCif.show()
+        malyCif.setPixelColor(20, barvaLed)
+        malyCif.setPixelColor(21, barvaLed)
 
         stop = false // Spustí stopky
         sec = 0 // Resetuje stopky
