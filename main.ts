@@ -79,20 +79,34 @@ function hodinyDatum() { // Zobrazí aktuální datum
 }
 
 function stopovaniCasu() { // Stopky
-    if (sec !== 60) {
+    if (sec !== 60 && sec < 30) {
+        malyCif.clear()
+        malyCif.setPixelColor(20, barvaLed)
+        malyCif.rotate(min * 2)
+
         velkyCif.rotate(1)
         sec++
-        velkyCif.show()
-    } else if (min === 0) {
+
+        showCif()
+    } else if (sec !== 60 && sec >= 30) {
+        malyCif.clear()
+        malyCif.setPixelColor(20, barvaLed)
+        malyCif.setPixelColor(21, barvaLed)
+        malyCif.rotate(min * 2)
+
         velkyCif.rotate(1)
-        sec = 1
-        min++
+        sec++
+
         showCif()
     } else {
-        malyCif.rotate(2)
+        min++
+        malyCif.clear()
+        malyCif.setPixelColor(20, barvaLed)
+        malyCif.rotate(min * 2)
+
         velkyCif.rotate(1)
         sec = 1
-        min++
+
         showCif()
     }
 }
@@ -155,11 +169,6 @@ pins.onPulsed(DigitalPin.P15, PulseValue.Low, function () { // Tlačítko R1
     } else if (stopky) { // Zjišťuje zda jsou aktivní hodiny či stopky
         velkyCif.clear()
         velkyCif.setPixelColor(30, barvaLed)
-
-        malyCif.clear()
-        malyCif.show()
-        malyCif.setPixelColor(20, barvaLed)
-        malyCif.setPixelColor(21, barvaLed)
 
         stop = false // Spustí stopky
         sec = 0 // Resetuje stopky
