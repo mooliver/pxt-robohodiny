@@ -111,7 +111,7 @@ function stopovaniCasu() { // Stopky
     }
 }
 
-
+// Test
 // Kód zobrazující čas po spuštění hodin (microbitu)
 hodinyCas()
 stavLed.setPixelColor(3, barvaLed)
