@@ -52,12 +52,12 @@ function clearLeds() { // Zhasne všechny LEDky
 function hodinyCas() { // Zobrazí aktuální čas
     clearCif()
 
-    if (DS3231.minute() <= 30) {
+    if (DS3231.minute() < 30) {
         malyCif.setPixelColor(20, barvaLed)
     } else {
         malyCif.setPixelColor(21, barvaLed)
     }
-    malyCif.rotate(DS3231.hour() * 2 - 2)
+    malyCif.rotate(DS3231.hour() * 2 - 1)
     
     velkyCif.setPixelColor(30, barvaLed)
     velkyCif.rotate(DS3231.minute())
