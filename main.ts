@@ -1,5 +1,5 @@
 // Pinout
-// P0 - malý ciferník (24 LED)
+// P8 - malý ciferník (24 LED)
 // P1 - velký ciferník (60 LED)
 // P2 - stavové ledky (4 LED, dotyková tlačítka)
 // P13 - dotykové tlačítko L1 - led 3
@@ -7,8 +7,13 @@
 // P15 - dotykové tlačítko R1 - led 0
 // P16 - dotykové tlačítko R2 - led 1
 
+pins.setPull(DigitalPin.P13, PinPullMode.PullNone)
+pins.setPull(DigitalPin.P14, PinPullMode.PullNone)
+pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
+pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
+
 // Led pasky
-const malyCif = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+const malyCif = neopixel.create(DigitalPin.P8, 24, NeoPixelMode.RGB)
 const velkyCif = neopixel.create(DigitalPin.P1, 60, NeoPixelMode.RGB)
 const stavLed = neopixel.create(DigitalPin.P2, 4, NeoPixelMode.RGB)
 
